@@ -20,7 +20,10 @@ function App() {
         <Dictionary />
       </main>
       <footer>
-        <div class="text-center">This Dictionary was Coded by Emma Yee-Joy is open-sourced on Github and is hosted on Netlify</div></footer>
+        <small>
+        <div class="text-center">This Dictionary was Coded by Emma Yee-Joy is <a href="https://github.com/eyeej/shecodes-dictionary">open-sourced</a> on Github and is hosted on <a href="https://shecodes-dictionary-io.netlify.app/">Netlify</a></div>
+        </small>
+        </footer>
     </div>
   );
 }
