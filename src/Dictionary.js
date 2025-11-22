@@ -9,18 +9,17 @@ export default function Dictionary() {
     let [results, setResults] = useState(null);
 
     function handleResponse(response) {
-        console.log(response.data[0]);
-        setResults(response.data[0]);
+        console.log(response.data);
+        setResults(response.data);
 
     }
 
-     const handleKeywordChange = (event) => {
+    const handleKeywordChange = (event) => {
     setKeyword(event.target.value);
     };
-
-    function search(event) {
+     
+        function search(event) {
         event.preventDefault();
-        alert(`Searching for ${keyword} definition`);
 
         let apiKey = `t9e9139a19b801fbcfa020d17a47ob1f`;
         let apiUrl = `https://api.shecodes.io/dictionary/v1/define?word=${keyword}&key=${apiKey}`;
