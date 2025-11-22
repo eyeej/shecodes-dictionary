@@ -1,8 +1,12 @@
-import React, { UseState } from "react";
+import React, { useState } from "react";
 import "./Dictionary.css";
 
 export default function Dictionary() {
     let [keyword, setKeyword] = useState("");
+
+     const handleKeywordChange = (event) => {
+    setKeyword(event.target.value);
+    };
 
     function search(event) {
         event.preventDefault();
