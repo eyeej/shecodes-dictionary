@@ -6,7 +6,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-          <h1>Dictionary</h1>
+          <h1 class="text-center">Dictionary</h1>
         <a
           className="App-link"
           href="https://www.shecodes.io/"
@@ -15,7 +15,11 @@ function App() {
         >
         </a>
       </header>
-      <footer>This Dictionary was Coded by Emma Yee-Joy is open-sourced on Github and is hosted on Netlify</footer>
+      <main>
+        <Dictionary />
+      </main>
+      <footer>
+        <div class="text-center">This Dictionary was Coded by Emma Yee-Joy is open-sourced on Github and is hosted on Netlify</div></footer>
     </div>
   );
 }
