@@ -1,3 +1,7 @@
+body {
+  background:#eeeeee;
+}
+
 .App-header {
   margin: 30px 0;
 }
@@ -5,11 +9,15 @@
 h1 {
   margin: 30px 0;
   padding: 20px;
-  
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .App-logo {
   max-width: 150px;
   display: block;
   margin: 0 auto;
+}
+
+.footer {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }

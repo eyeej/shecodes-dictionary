@@ -20,6 +20,8 @@ function App() {
         <Dictionary />
       </main>
       <footer>
+        <br/>
+        <br/>
         <small>
         <div className="text-center">This Dictionary was Coded by Emma Yee-Joy is <a href="https://github.com/eyeej/shecodes-dictionary">open-sourced</a> on Github and is hosted on <a href="https://shecodes-dictionary-io.netlify.app/">Netlify</a></div>
         </small>
