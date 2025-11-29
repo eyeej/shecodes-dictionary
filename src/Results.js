@@ -1,6 +1,7 @@
 import React from "react";
 import Meaning from "./Meaning.js";
 import Phonetics from "./Phonetics.js";
+import './App.css';
 
 export default function Results(props) {
     console.log(JSON.stringify(props.results, null, 2));
