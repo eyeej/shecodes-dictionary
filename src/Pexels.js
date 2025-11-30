@@ -1,31 +1,80 @@
-const express = require("express");
-const cors = require("cors");
-const axios = require("axios");
+import React, { useState } from "react";
+import axios from "axios";
+import Results from "./Results.js";
+import "./Dictionary.css";
 
-const app = express();
-const PORT = process.env.PORT || 5000;
+export default function Dictionary() {
+    let [keyword, setKeyword] = useState("");
+    let [results, setResults] = useState(null);
+    let [images, setImages] = useState(null);
+    let [loading, setLoading] = useState(false);
 
-app.use(cors()); 
+    function search(event) {
+        event.preventDefault();
+        if (!keyword.trim()) return;
 
-app.get("/search", async (req, res) => {
-  try {
-    const { query, per_page } = req.query;
-    const PEXELS_API_KEY = "eB4rh2l1HxAEaoUYEFyxj7tcoB8PxfeO0GiWUCq1CfV2rRl9hTZpPtU2";
-    const pexelsUrl = `https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=${per_page || 1}`;
+        setLoading(true);
 
-    const response = await axios.get(pexelsUrl, {
-      headers: {
-        Authorization: PEXELS_API_KEY
-      }
-    });
+        // Fetch word definition
+        let apiKey = `t9e9139a19b801fbcfa020d17a47ob1f`;
+        let dictionaryUrl = `https://api.shecodes.io/dictionary/v1/define?word=${keyword}&key=${apiKey}`;
+        
+        // Fetch images from Pexels via our Express server
+        let pexelsUrl = `http://localhost:5000/search?query=${encodeURIComponent(keyword)}&per_page=3`;
 
-    res.json(response.data);
-  } catch (err) {
-    console.error("Error fetching Pexels:", err.message);
-    res.status(500).json({ error: "Error fetching from Pexels" });
-  }
-});
+        Promise.all([
+            axios.get(dictionaryUrl),
+            axios.get(pexelsUrl)
+        ])
+        .then(([dictResponse, pexelsResponse]) => {
+            console.log("Dictionary data:", dictResponse.data);
+            console.log("Pexels data:", pexelsResponse.data);
+            setResults(dictResponse.data);
+            setImages(pexelsResponse.data.photos);
+            setLoading(false);
+        })
+        .catch((err) => {
+            console.error("Error:", err);
+            setLoading(false);
+        });
+    }
 
-app.listen(PORT, () => {
-  console.log(`Proxy server running at http://localhost:${PORT}`);
-});
+    return (
+        <div className="Dictionary">
+            <form onSubmit={search}>
+                <input 
+                    type="search" 
+                    onChange={(e) => setKeyword(e.target.value)}
+                    value={keyword}
+                    placeholder="Enter a word..."
+                />
+                <button type="submit">Search</button>
+            </form>
+            {loading && <p>Loading...</p>}
+            {results && (
+                <>
+                    <Results results={results} />
+                    {images && images.length > 0 && (
+                        <div className="images-section">
+                            <h3>Related Images</h3>
+                            <div className="images-grid">
+                                {images.map((photo, index) => (
+                                    <div key={index} className="image-item">
+                                        <img 
+                                            src={photo.src.medium} 
+                                            alt={photo.photographer}
+                                            style={{width: "100%", borderRadius: "8px"}}
+                                        />
+                                        <p style={{fontSize: "12px", marginTop: "5px"}}>
+                                            Photo by {photo.photographer}
+                                        </p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+                </>
+            )}
+        </div>
+    );
+}
