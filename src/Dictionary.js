@@ -17,10 +17,6 @@ export default function Dictionary() {
         setKeyword(event.target.value);
     };
 
-    function handlePexelsResponse(response) {
-        console.log(response.data);
-    }
-
     function search(event) {
         event.preventDefault();
 
@@ -28,10 +24,6 @@ export default function Dictionary() {
         let apiUrl = `https://api.shecodes.io/dictionary/v1/define?word=${keyword}&key=${apiKey}`;
         axios.get(apiUrl).then(handleResponse);
 
-        let PexelsApiKey = `eB4rh2l1HxAEaoUYEFyxj7tcoB8PxfeO0GiWUCq1CfV2rRl9hTZpPtU2`;
-        let PexelsApiUrl = `https://api.pexels.com/v1/search?query=${keyword}&per_page=1`;
-        let headers = { Authorization: `Bearer ${PexelsApiKey}`};
-        axios.get(PexelsApiUrl, {headers: headers }).then(handlePexelsResponse);
     }
 
     return (
