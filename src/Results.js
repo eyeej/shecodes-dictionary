@@ -4,12 +4,15 @@ import Phonetics from "./Phonetics.js";
 import './App.css';
 
 export default function Results(props) {
-    console.log(JSON.stringify(props.results, null, 2));
+    console.log("Results:", JSON.stringify(props.results, null, 2));
+    
     if (props.results) {
         return (
             <div className="Result">
                 <h2>{props.results.word}</h2>
-                <p>{props.results.definition}</p>
+                {props.results.phonetic && (
+                    <p className="phonetic">{props.results.phonetic}</p>
+                )}
                 {props.results.meanings && props.results.meanings.map(function(meaning, index) {
                     return (
                         <div key={index}>
@@ -17,16 +20,21 @@ export default function Results(props) {
                         </div>
                     );
                 })}
-                {props.results.Phonetics && props.results.Phonetics.map(function(phonetic, index) {
-                    return (
-                        <div key={index}>
-                            <Phonetics phonetics={phonetic} />
-                        </div>
-                    );
-                })}
+                {props.results.phonetics && props.results.phonetics.length > 0 && (
+                    <div>
+                        <h3>Phonetics:</h3>
+                        {props.results.phonetics.map(function(phonetic, index) {
+                            return (
+                                <div key={index}>
+                                    <Phonetics phonetics={phonetic} />
+                                </div>
+                            );
+                        })}
+                    </div>
+                )}
             </div>
         );
     } else {
-        return null;
+        return <p>No results yet. Try searching for a word!</p>;
     }
 }

@@ -1,3 +1,110 @@
 .Dictionary {
     text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.Dictionary form {
+    margin-bottom: 30px;
+}
+
+.Dictionary input {
+    width: 100%;
+    max-width: 500px;
+    padding: 12px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-family: inherit;
+}
+
+.Dictionary input:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.Result {
+    text-align: left;
+    margin-top: 30px;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.Result h2 {
+    color: #333;
+    margin: 0 0 10px 0;
+    font-size: 28px;
+}
+
+.phonetic {
+    color: #666;
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+.Meaning {
+    margin: 20px 0;
+    padding: 15px;
+    background: #f9f9f9;
+    border-left: 4px solid #007bff;
+    border-radius: 4px;
+}
+
+.Meaning h3 {
+    color: #007bff;
+    margin: 0 0 15px 0;
+    font-size: 18px;
+}
+
+.Meaning h4 {
+    color: #555;
+    margin: 15px 0 10px 0;
+    font-size: 14px;
+}
+
+.definition {
+    margin: 10px 0;
+    padding: 10px;
+    background: white;
+    border-radius: 4px;
+}
+
+.definition p {
+    margin: 5px 0;
+}
+
+.definition strong {
+    color: #333;
+}
+
+.definition em {
+    color: #666;
+    font-style: italic;
+}
+
+.Phonetic {
+    margin: 15px 0;
+    padding: 10px;
+    background: #f0f0f0;
+    border-radius: 5px;
+    text-align: left;
+}
+
+.Phonetic a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.Phonetic a:hover {
+    text-decoration: underline;
+}
+
+.Phonetic p {
+    margin: 5px 0;
+    color: #666;
 }
