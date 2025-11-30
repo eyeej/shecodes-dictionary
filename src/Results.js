@@ -1,40 +1,17 @@
 import React from "react";
-import Meaning from "./Meaning.js";
-import Phonetics from "./Phonetics.js";
-import './App.css';
 
 export default function Results(props) {
-    console.log("Results:", JSON.stringify(props.results, null, 2));
+    console.log("Results received:", props.results);
     
-    if (props.results) {
-        return (
-            <div className="Result">
-                <h2>{props.results.word}</h2>
-                {props.results.phonetic && (
-                    <p className="phonetic">{props.results.phonetic}</p>
-                )}
-                {props.results.meanings && props.results.meanings.map(function(meaning, index) {
-                    return (
-                        <div key={index}>
-                            <Meaning meaning={meaning} />
-                        </div>
-                    );
-                })}
-                {props.results.phonetics && props.results.phonetics.length > 0 && (
-                    <div>
-                        <h3>Phonetics:</h3>
-                        {props.results.phonetics.map(function(phonetic, index) {
-                            return (
-                                <div key={index}>
-                                    <Phonetics phonetics={phonetic} />
-                                </div>
-                            );
-                        })}
-                    </div>
-                )}
-            </div>
-        );
-    } else {
-        return <p>No results yet. Try searching for a word!</p>;
+    if (!props.results) {
+        return <p>No results</p>;
     }
+
+    return (
+        <div className="Result" style={{padding: "20px", border: "2px solid blue"}}>
+            <h2 style={{color: "black"}}>{props.results.word}</h2>
+            <p style={{color: "black"}}>Phonetic: {props.results.phonetic}</p>
+            <p style={{color: "black"}}>Meanings: {props.results.meanings ? props.results.meanings.length : 0}</p>
+        </div>
+    );
 }
