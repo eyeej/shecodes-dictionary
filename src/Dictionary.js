@@ -18,7 +18,7 @@ export default function Dictionary() {
     setLoading(true);
     setError(null);
 
-    const dictionaryKey = "YOUR_SHECODES_KEY_HERE";
+    const dictionaryKey = "t9e9139a19b801fbcfa020d17a47ob1f";
     const dictionaryUrl = `https://api.shecodes.io/dictionary/v1/define?word=${keyword}&key=${dictionaryKey}`;
     const pexelsUrl = `http://localhost:5000/search?query=${encodeURIComponent(keyword)}&per_page=6`;
 

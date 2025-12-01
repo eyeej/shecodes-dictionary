@@ -1,0 +1,14 @@
+.Results {
+  margin-top: 20px;
+}
+
+.word {
+  font-size: 32px;
+  margin: 0;
+  font-weight: bold;
+}
+
+.phonetic {
+  color: #777;
+  margin-bottom: 20px;
+}
