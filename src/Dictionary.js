@@ -18,17 +18,21 @@ export default function Dictionary() {
     setLoading(true);
     setError(null);
 
+    // Dictionary API
     const dictionaryKey = "t9e9139a19b801fbcfa020d17a47ob1f";
     const dictionaryUrl = `https://api.shecodes.io/dictionary/v1/define?word=${keyword}&key=${dictionaryKey}`;
-    const pexelsUrl = `http://localhost:5000/search?query=${encodeURIComponent(keyword)}&per_page=6`;
+
+    // Unsplash API
+    const unsplashKey = process.env.REACT_APP_UNSPLASH_KEY;
+    const unsplashUrl = `https://api.unsplash.com/search/photos?query=${keyword}&per_page=6&client_id=${unsplashKey}`;
 
     Promise.all([
       axios.get(dictionaryUrl),
-      axios.get(pexelsUrl)
+      axios.get(unsplashUrl)
     ])
-      .then(([dictRes, pexelsRes]) => {
+      .then(([dictRes, unsplashRes]) => {
         setResults(dictRes.data);
-        setImages(pexelsRes.data.photos || []);
+        setImages(unsplashRes.data.results || []); // Unsplash uses `results`
       })
       .catch(err => {
         console.error("Error fetching data:", err);

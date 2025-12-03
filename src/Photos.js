@@ -8,17 +8,17 @@ export default function Photos({ images }) {
     <div className="Photos">
       <h3>Related Images</h3>
       <div className="photos-grid">
-        {images.map((photo, index) => (
-          <div key={index} className="photo-item">
-            <a href={photo.url} target="_blank" rel="noopener noreferrer">
+        {images.map((photo) => (
+          <div key={photo.id} className="photo-item">
+            <a href={photo.links.html} target="_blank" rel="noopener noreferrer">
               <img
-                src={photo.src.medium}
-                alt={photo.photographer}
+                src={photo.urls.small}                     // correct Unsplash property
+                alt={photo.alt_description || "Image"}    // alt text
                 style={{ width: "100%", borderRadius: "8px" }}
               />
             </a>
             <p style={{ fontSize: "12px", marginTop: "5px" }}>
-              Photo by {photo.photographer}
+              Photo by {photo.user?.name || "Unknown"} on Unsplash
             </p>
           </div>
         ))}

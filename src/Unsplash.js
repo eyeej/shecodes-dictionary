@@ -4,10 +4,10 @@ import Results from "./Results.js";
 import "./Dictionary.css";
 
 export default function Dictionary() {
-  let [keyword, setKeyword] = useState("");
-  let [results, setResults] = useState(null);
-  let [images, setImages] = useState([]);
-  let [loading, setLoading] = useState(false);
+  const [keyword, setKeyword] = useState("");
+  const [results, setResults] = useState(null);
+  const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   function search(event) {
     event.preventDefault();
@@ -15,17 +15,18 @@ export default function Dictionary() {
 
     setLoading(true);
 
-    const apiKey = "YOUR_VALID_SHECODES_KEY";
-    const dictionaryUrl = `https://api.shecodes.io/dictionary/v1/define?word=${keyword}&key=${apiKey}`;
+    // Dictionary API key
+    const dictionaryKey = `u_qlN5IVFM8WZ_RuQRM2YxIPWrwlYoIo4jNaTlhzxmo`;
+    const dictionaryUrl = `https://api.shecodes.io/dictionary/v1/define?word=${keyword}&key=${dictionaryKey}`;
 
-    const pexelsUrl = `http://localhost:5000/search?query=${encodeURIComponent(
-      keyword
-    )}&per_page=6`;
+    // Unsplash API key
+    const unsplashKey = "YOUR_UNSPLASH_ACCESS_KEY";
+    const unsplashUrl = `https://api.unsplash.com/search/photos?query=${keyword}&per_page=6&client_id=${unsplashKey}`;
 
-    Promise.all([axios.get(dictionaryUrl), axios.get(pexelsUrl)])
-      .then(([dictRes, pexelsRes]) => {
+    Promise.all([axios.get(dictionaryUrl), axios.get(unsplashUrl)])
+      .then(([dictRes, unsplashRes]) => {
         setResults(dictRes.data);
-        setImages(pexelsRes.data.photos || []);
+        setImages(unsplashRes.data.results || []); // <-- correct for Unsplash
       })
       .catch((err) => {
         console.error("Error:", err);
@@ -55,15 +56,15 @@ export default function Dictionary() {
             <div className="images-section">
               <h3>Related Images</h3>
               <div className="images-grid">
-                {images.map((photo, index) => (
-                  <div key={index} className="image-item">
+                {images.map((photo) => (
+                  <div key={photo.id} className="image-item">
                     <img
-                      src={photo.src.medium}
-                      alt={photo.photographer}
+                      src={photo.urls.small}
+                      alt={photo.alt_description || "Image"}
                       style={{ width: "100%", borderRadius: "8px" }}
                     />
                     <p style={{ fontSize: "12px" }}>
-                      Photo by {photo.photographer}
+                      Photo by {photo.user?.name}
                     </p>
                   </div>
                 ))}
